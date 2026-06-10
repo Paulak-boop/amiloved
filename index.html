@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Am I Loved? | A Wellness Resource for Jewish Women & Queer Jews Navigating Dating</title>
+
+  <!-- SEO -->
+  <meta name="description" content="A free, interactive wellness tool for Jewish women and queer Jewish people navigating antisemitism, identity, and intimacy in dating. Grounding, resilience, and healing — developed by Paula Kirsch, LCSW, CST." />
+  <meta name="author" content="Paula Kirsch, LCSW, CST" />
+  <meta name="keywords" content="Jewish women dating, queer Jewish, antisemitism dating, Jewish minority stress, Jewish wellness, somatic therapy, meaning-making, Paula Kirsch" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Am I Loved? | A Wellness Resource for Jewish Women & Queer Jews" />
+  <meta property="og:description" content="A free, interactive wellness tool for Jewish women and queer Jewish people navigating antisemitism, identity, and intimacy in dating. Grounding, resilience, and healing — developed by Paula Kirsch, LCSW, CST." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-netlify-url.netlify.app" />
+  <meta property="og:image" content="https://images.squarespace-cdn.com/content/5fee338fe1367528108d3bd3/392223e1-4dc2-4af3-abac-76cd1b521fa9/ami_loved_social_share.png?content-type=image%2Fpng" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Paula Kirsch, LCSW, CST" />
+
+  <!-- Twitter/X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Am I Loved? | A Wellness Resource for Jewish Women & Queer Jews" />
+  <meta name="twitter:description" content="A free wellness tool for Jewish women and queer Jewish people navigating antisemitism, identity, and intimacy in dating. Developed by Paula Kirsch, LCSW, CST." />
+  <meta name="twitter:image" content="https://images.squarespace-cdn.com/content/5fee338fe1367528108d3bd3/392223e1-4dc2-4af3-abac-76cd1b521fa9/ami_loved_social_share.png?content-type=image%2Fpng" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --ink: #1C1A18;
+    --paper: #FAF8F4;
+    --warm-mid: #F0EAE0;
+    --gold: #B8913A;
+    --gold-light: #D4AF6A;
+    --sage: #7A8C7E;
+    --sage-light: #C2CFBE;
+    --blush: #C4897A;
+    --blush-light: #E8C5BC;
+    --night: #2C2240;
+    --crisis: #8B3A3A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* SCREENS */
+  .screen { display: none; min-height: 100vh; flex-direction: column; }
+  .screen.active { display: flex; }
+
+  /* ── LANDING ── */
+  #screen-landing {
+    background: var(--night);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #screen-landing::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(184,145,58,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 75% 25%, rgba(196,137,122,0.13) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .star-of-david {
+    font-size: 2.2rem;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .landing-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 300;
+    color: #FAF8F4;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.4rem;
+  }
+
+  .landing-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .landing-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(250,248,244,0.6);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.04em;
+  }
+
+  .landing-tagline {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: rgba(250,248,244,0.45);
+    margin-bottom: 3rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .landing-prompt {
+    font-size: 1rem;
+    color: rgba(250,248,244,0.75);
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .pathway-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    max-width: 700px;
+    width: 100%;
+    margin-bottom: 3rem;
+  }
+
+  .pathway-card {
+    background: rgba(250,248,244,0.06);
+    border: 1px solid rgba(250,248,244,0.12);
+    border-radius: 12px;
+    padding: 1.5rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+  }
+
+  .pathway-card:hover {
+    background: rgba(250,248,244,0.11);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .pathway-icon { font-size: 1.6rem; margin-bottom: 0.7rem; }
+  .pathway-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #FAF8F4;
+    margin-bottom: 0.3rem;
+  }
+  .pathway-desc {
+    font-size: 0.8rem;
+    color: rgba(250,248,244,0.5);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .crisis-bar {
+    background: rgba(139,58,58,0.2);
+    border: 1px solid rgba(139,58,58,0.35);
+    border-radius: 8px;
+    padding: 0.75rem 1.2rem;
+    font-size: 0.8rem;
+    color: rgba(250,248,244,0.6);
+    max-width: 560px;
+    line-height: 1.5;
+  }
+
+  .crisis-bar a { color: var(--blush-light); text-decoration: none; }
+  .crisis-bar a:hover { text-decoration: underline; }
+
+  .byline {
+    position: absolute;
+    bottom: 1.2rem;
+    font-size: 0.72rem;
+    color: rgba(250,248,244,0.25);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── SHARED INNER SCREEN ── */
+  .inner-screen {
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    gap: 1rem;
+  }
+
+  .back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--sage);
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0;
+    transition: color 0.2s;
+  }
+  .back-btn:hover { color: var(--ink); }
+
+  .top-bar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+
+  .content-area {
+    flex: 1;
+    padding: 2.5rem 2rem;
+    max-width: 680px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .section-eyebrow {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-intro {
+    font-size: 1rem;
+    color: #4A4540;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  /* ── GROUNDING ── */
+  #screen-grounding { background: var(--paper); }
+
+  .breath-circle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .breath-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--sage-light), var(--sage));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.1s;
+    box-shadow: 0 0 0 0 rgba(122,140,126,0.4);
+  }
+
+  .breath-circle.expanding {
+    animation: breatheIn 4s ease-in-out forwards;
+  }
+  .breath-circle.holding {
+    animation: holdBreath 4s ease-in-out forwards;
+  }
+  .breath-circle.contracting {
+    animation: breatheOut 4s ease-in-out forwards;
+  }
+
+  @keyframes breatheIn {
+    from { transform: scale(1); box-shadow: 0 0 0 0 rgba(122,140,126,0.4); }
+    to { transform: scale(1.5); box-shadow: 0 0 0 30px rgba(122,140,126,0); }
+  }
+  @keyframes holdBreath {
+    from { transform: scale(1.5); }
+    to { transform: scale(1.5); }
+  }
+  @keyframes breatheOut {
+    from { transform: scale(1.5); }
+    to { transform: scale(1); }
+  }
+
+  .breath-inner {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: white;
+    text-align: center;
+    font-style: italic;
+    pointer-events: none;
+  }
+
+  .breath-instruction {
+    font-size: 0.9rem;
+    color: var(--sage);
+    margin-top: 1rem;
+    font-style: italic;
+    min-height: 1.4rem;
+    text-align: center;
+  }
+
+  .grounding-prompts {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .grounding-prompt-card {
+    background: var(--warm-mid);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    border-left: 3px solid var(--sage);
+  }
+
+  .prompt-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+
+  .prompt-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  /* ── RESILIENCE ── */
+  #screen-resilience { background: var(--paper); }
+
+  .reflection-card {
+    background: var(--warm-mid);
+    border-radius: 12px;
+    padding: 1.8rem;
+    margin-bottom: 1.2rem;
+    border-top: 3px solid var(--gold);
+  }
+
+  .reflection-q {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    line-height: 1.45;
+  }
+
+  .reflection-input {
+    width: 100%;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--ink);
+    resize: vertical;
+    min-height: 80px;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+  .reflection-input:focus { border-color: var(--gold); }
+  .reflection-input::placeholder { color: #AAA; font-style: italic; }
+
+  .affirmation-strip {
+    background: linear-gradient(135deg, var(--night), #3D2F5A);
+    border-radius: 12px;
+    padding: 1.8rem;
+    color: white;
+    margin: 1.5rem 0;
+    text-align: center;
+  }
+
+  .affirmation-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--gold-light);
+    margin-bottom: 0.8rem;
+  }
+
+  .affirmation-source {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .btn-refresh {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px;
+    color: rgba(255,255,255,0.6);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    margin-top: 0.8rem;
+    transition: all 0.2s;
+  }
+  .btn-refresh:hover { background: rgba(255,255,255,0.1); color: white; }
+
+  /* ── AFTER PAINFUL INTERACTION ── */
+  #screen-after { background: var(--paper); }
+
+  .validation-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 2rem;
+  }
+
+  .validation-chip {
+    background: var(--warm-mid);
+    border: 1.5px solid transparent;
+    border-radius: 8px;
+    padding: 0.9rem 1.2rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--ink);
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    line-height: 1.4;
+  }
+
+  .validation-chip:hover, .validation-chip.selected {
+    border-color: var(--blush);
+    background: var(--blush-light);
+  }
+
+  .validation-response {
+    display: none;
+    background: var(--warm-mid);
+    border-radius: 12px;
+    padding: 1.8rem;
+    border-left: 3px solid var(--blush);
+    margin-bottom: 1.5rem;
+    animation: fadeIn 0.4s ease;
+  }
+  .validation-response.visible { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .validation-response-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--blush);
+    margin-bottom: 0.8rem;
+  }
+
+  .validation-response p {
+    font-size: 0.95rem;
+    color: #4A4540;
+    line-height: 1.75;
+    margin-bottom: 0.8rem;
+    font-weight: 300;
+  }
+
+  .somatic-suggestion {
+    background: rgba(122,140,126,0.1);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-top: 1rem;
+    font-size: 0.88rem;
+    color: var(--sage);
+    border-left: 2px solid var(--sage);
+    line-height: 1.6;
+  }
+
+  .somatic-suggestion strong { display: block; margin-bottom: 0.3rem; font-weight: 500; }
+
+  /* SHARED BUTTONS */
+  .btn-primary {
+    background: var(--gold);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.85rem 1.8rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+  .btn-primary:hover { background: #A07830; transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: none;
+    color: var(--sage);
+    border: 1px solid var(--sage-light);
+    border-radius: 8px;
+    padding: 0.7rem 1.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  .btn-secondary:hover { border-color: var(--sage); color: var(--ink); }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    margin: 2rem 0;
+  }
+
+  /* CLOSING STATEMENT */
+  .closing {
+    background: var(--warm-mid);
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    margin-top: 1.5rem;
+  }
+
+  .closing p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: #6A6060;
+    line-height: 1.65;
+  }
+
+  /* STEP COUNTER */
+  .step-dots {
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+  }
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--sage-light);
+    transition: background 0.2s;
+  }
+  .dot.active { background: var(--gold); }
+
+  @media (max-width: 480px) {
+    .content-area { padding: 1.5rem 1.2rem; }
+    .top-bar { padding: 1rem 1.2rem; }
+    .pathway-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════ LANDING ══ -->
+<div id="screen-landing" class="screen active">
+  <div class="star-of-david">✦ ✡ ✦</div>
+  <h1 class="landing-title"><em>Am I</em> Loved?</h1>
+  <p class="landing-subtitle">a resource for Jewish women & queer folks navigating love in hard times</p>
+  <p class="landing-tagline">Grounding · Resilience · Healing</p>
+
+  <p class="landing-prompt">Where are you right now?</p>
+
+  <div class="pathway-grid">
+    <div class="pathway-card" onclick="goTo('grounding')">
+      <div class="pathway-icon">🌿</div>
+      <div class="pathway-name">I need to ground</div>
+      <div class="pathway-desc">Before a date, during a spiral, when the world feels loud. Let's come back to your body.</div>
+    </div>
+    <div class="pathway-card" onclick="goTo('resilience')">
+      <div class="pathway-icon">🕯</div>
+      <div class="pathway-name">I want to build resilience</div>
+      <div class="pathway-desc">Ongoing reflection rooted in meaning, values, and what still matters to you.</div>
+    </div>
+    <div class="pathway-card" onclick="goTo('after')">
+      <div class="pathway-icon">🫂</div>
+      <div class="pathway-name">Something painful happened</div>
+      <div class="pathway-desc">A date revealed bias. You hid part of yourself. You felt erased. You're not alone.</div>
+    </div>
+  </div>
+
+  <div class="crisis-bar">
+    <strong style="color:rgba(250,248,244,0.75);">This is not a crisis resource.</strong> If you're in emotional distress or need immediate support, please reach out to a licensed therapist or contact the <a href="https://www.crisistextline.org" target="_blank">Crisis Text Line</a> (text HOME to 741741) or call <a href="tel:988">988</a>.
+  </div>
+
+  <p class="byline">Developed by Paula Kirsch, LCSW, CST &nbsp;·&nbsp; © 2026 All rights reserved</p>
+</div>
+
+<!-- ══════════════════════════════════════════ GROUNDING ══ -->
+<div id="screen-grounding" class="screen inner-screen">
+  <div class="top-bar">
+    <button class="back-btn" onclick="goTo('landing')">← Back</button>
+    <span class="top-bar-title">Am I Loved?</span>
+  </div>
+  <div class="content-area">
+    <p class="section-eyebrow">Grounding Practice</p>
+    <h2 class="section-heading">Let's come<br>back to your body.</h2>
+    <p class="section-intro">You don't have to be calm to use this. You just have to be here. Start with your breath — it's always available, even when nothing else is.</p>
+
+    <div class="breath-circle-container">
+      <div class="breath-circle" id="breathCircle" onclick="startBreath()">
+        <div class="breath-inner" id="breathInner">Tap to<br>begin</div>
+      </div>
+      <p class="breath-instruction" id="breathInstruction">Breathe at your own pace, or let the circle guide you.</p>
+    </div>
+
+    <hr class="divider">
+
+    <p class="section-eyebrow">Five Senses Check-In</p>
+    <p style="font-size:0.9rem; color:#6A6060; margin-bottom:1.2rem; font-weight:300;">Notice, don't judge. This is just observation.</p>
+
+    <div class="grounding-prompts">
+      <div class="grounding-prompt-card">
+        <p class="prompt-label">👁 See</p>
+        <p class="prompt-text">Name five things you can see right now. Let your eyes move slowly.</p>
+      </div>
+      <div class="grounding-prompt-card">
+        <p class="prompt-label">🤲 Touch</p>
+        <p class="prompt-text">What does the surface beneath you feel like? Press your feet into the floor.</p>
+      </div>
+      <div class="grounding-prompt-card">
+        <p class="prompt-label">👂 Hear</p>
+        <p class="prompt-text">What sounds are present? Near ones first, then further away.</p>
+      </div>
+      <div class="grounding-prompt-card">
+        <p class="prompt-label">👃 Smell</p>
+        <p class="prompt-text">Take one slow breath through your nose. What's there?</p>
+      </div>
+      <div class="grounding-prompt-card">
+        <p class="prompt-label">💛 Anchor</p>
+        <p class="prompt-text">You are here. You are whole. You belong to yourself first.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <p class="section-eyebrow">One Grounding Phrase</p>
+    <div class="affirmation-strip">
+      <p class="affirmation-text" id="groundingAffirmation">"My safety lives in me, not in their acceptance."</p>
+      <button class="btn-refresh" onclick="refreshGroundingAffirmation()">↻ Another</button>
+    </div>
+
+    <div class="closing">
+      <p>When you're ready — not when you feel perfectly okay, just when you're ready — you can close this and go. You've done something good for yourself today.</p>
+    </div>
+    <p style="font-size:0.72rem; color:#BBB; text-align:center; margin-top:2rem; padding-bottom:2rem;">© 2026 Paula Kirsch, LCSW, CST &nbsp;·&nbsp; All rights reserved</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ RESILIENCE ══ -->
+<div id="screen-resilience" class="screen inner-screen">
+  <div class="top-bar">
+    <button class="back-btn" onclick="goTo('landing')">← Back</button>
+    <span class="top-bar-title">Am I Loved?</span>
+  </div>
+  <div class="content-area">
+    <p class="section-eyebrow">Resilience Practice</p>
+    <h2 class="section-heading">What still<br>matters to you?</h2>
+    <p class="section-intro">Viktor Frankl wrote that meaning is not something we find — it's something we create, even in the hardest conditions. These reflections are an invitation to locate yourself in something larger than the fear.</p>
+
+    <div class="affirmation-strip" style="margin-bottom:2rem;">
+      <p class="affirmation-text" id="resilienceQuote">"Between stimulus and response there is a space. In that space is our power to choose our response."</p>
+      <p class="affirmation-source">— Viktor Frankl</p>
+      <button class="btn-refresh" onclick="refreshResilienceQuote()">↻ Another</button>
+    </div>
+
+    <div class="reflection-card">
+      <p class="reflection-q">What does being loved — truly loved — look and feel like to you? Not what you've settled for. What you actually want.</p>
+      <textarea class="reflection-input" placeholder="Write freely. This is just for you."></textarea>
+    </div>
+
+    <div class="reflection-card">
+      <p class="reflection-q">Name something about your Jewish or queer identity that you consider a gift — something that has given you depth, perception, or connection.</p>
+      <textarea class="reflection-input" placeholder="Take your time with this one..."></textarea>
+    </div>
+
+    <div class="reflection-card">
+      <p class="reflection-q">What are you protecting when you stay small or hide who you are? Is that protection still serving you?</p>
+      <textarea class="reflection-input" placeholder="Curiosity, not judgment..."></textarea>
+    </div>
+
+    <div class="reflection-card">
+      <p class="reflection-q">What would you tell a younger version of yourself — the one who first learned the world could be unsafe — about love and belonging?</p>
+      <textarea class="reflection-input" placeholder="Speak gently..."></textarea>
+    </div>
+
+    <hr class="divider">
+
+    <div class="closing">
+      <p>"The striving to find a meaning in one's life is the primary motivational force in man." You came here. That means something. Your desire to connect, to love, and to be loved — that is not naive. It is one of the bravest things about you.</p>
+      <p style="margin-top:0.6rem; font-style:normal; font-size:0.78rem; color:#AAA; font-family:'DM Sans',sans-serif;">Paraphrase, Viktor Frankl, Man's Search for Meaning</p>
+    </div>
+    <p style="font-size:0.72rem; color:#BBB; text-align:center; margin-top:2rem; padding-bottom:2rem;">© 2026 Paula Kirsch, LCSW, CST &nbsp;·&nbsp; All rights reserved</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ AFTER PAINFUL ══ -->
+<div id="screen-after" class="screen inner-screen">
+  <div class="top-bar">
+    <button class="back-btn" onclick="goTo('landing')">← Back</button>
+    <span class="top-bar-title">Am I Loved?</span>
+  </div>
+  <div class="content-area">
+    <p class="section-eyebrow">Processing Together</p>
+    <h2 class="section-heading">Something happened.<br>Let's name it.</h2>
+    <p class="section-intro">You don't have to minimize this or get over it quickly. The first step is just putting words to what occurred. Select what resonates — you can choose more than one.</p>
+
+    <div class="validation-options" id="validationOptions">
+      <button class="validation-chip" onclick="showValidation('hidden')">I hid who I am or where I come from</button>
+      <button class="validation-chip" onclick="showValidation('bias')">A date or partner revealed bias or prejudice</button>
+      <button class="validation-chip" onclick="showValidation('erased')">My identity was questioned, minimized, or erased</button>
+      <button class="validation-chip" onclick="showValidation('tokenized')">I felt tokenized — like I was interesting, not loved</button>
+      <button class="validation-chip" onclick="showValidation('excluded')">I felt I had to choose between love and my community</button>
+      <button class="validation-chip" onclick="showValidation('news')">The news made dating feel impossible or unsafe</button>
+    </div>
+
+    <div class="validation-response" id="validation-hidden">
+      <p class="validation-response-heading">You protected yourself. That makes sense.</p>
+      <p>Concealment is a survival strategy, not a character flaw. When someone has learned — through experience, not paranoia — that revealing their full self carries risk, hiding is a reasonable response to an unreasonable situation.</p>
+      <p>The question isn't whether you were wrong to hide. The question is whether the person in front of you has earned the real you yet. Many haven't.</p>
+      <div class="somatic-suggestion">
+        <strong>A body practice for this:</strong>
+        Place one hand on your chest. Take three slow breaths. Say quietly: "I kept myself safe. That was wise. I am still whole."
+      </div>
+    </div>
+
+    <div class="validation-response" id="validation-bias">
+      <p class="validation-response-heading">What you felt was real. That was bias.</p>
+      <p>When someone reveals prejudice — casually, defensively, or dressed up as opinion — it lands in the body before it lands in the mind. The sick feeling, the hypervigilance, the sudden calculation of how safe you are: that's not overreaction. That's wisdom.</p>
+      <p>You are not responsible for educating people who harm you. You are allowed to simply leave.</p>
+      <div class="somatic-suggestion">
+        <strong>A body practice for this:</strong>
+        Shake your hands out slowly, as if releasing something. This is literal — your nervous system responds to movement. Let the encounter leave your body before it moves into your story about yourself.
+      </div>
+    </div>
+
+    <div class="validation-response" id="validation-erased">
+      <p class="validation-response-heading">Your identity is not up for debate.</p>
+      <p>Being told your experience isn't real, your identity is a choice, or that you're too sensitive — is a form of erasure. It's disorienting on purpose, even when it isn't intended that way. You are allowed to trust your own knowing of yourself.</p>
+      <p>Other people's confusion about who you are says nothing about who you actually are.</p>
+      <div class="somatic-suggestion">
+        <strong>A body practice for this:</strong>
+        Stand with your feet hip-width apart and feel the ground. Say your own name aloud, quietly. Then say one true thing about yourself. You exist. You are specific. You are not an abstraction.
+      </div>
+    </div>
+
+    <div class="validation-response" id="validation-tokenized">
+      <p class="validation-response-heading">You deserved to be known, not collected.</p>
+      <p>Being someone's "interesting experience" — their Jewish girlfriend, their queer adventure — is lonelier than being alone. Your identity is not an exotic detail. It is the whole story of how you came to be the person you are. Someone who sees it as a feature hasn't met you yet.</p>
+      <div class="somatic-suggestion">
+        <strong>A body practice for this:</strong>
+        Bring to mind one person who has truly seen you — a friend, a family member, anyone. Notice what that felt like in your body. That feeling is your reference point. It exists. You've been known. That is possible for you.
+      </div>
+    </div>
+
+    <div class="validation-response" id="validation-excluded">
+      <p class="validation-response-heading">You shouldn't have to choose. And yet.</p>
+      <p>The pressure to compartmentalize — to be Jewish in one room and queer in another, or to love someone whose world has no room for your community — is a real and underacknowledged grief. You are allowed to want a love that holds all of you.</p>
+      <p>That is not asking too much. That is asking exactly enough.</p>
+      <div class="somatic-suggestion">
+        <strong>A body practice for this:</strong>
+        Take one full breath for each part of yourself you felt you had to set aside today. Breathe it back in. All of it belongs to you.
+      </div>
+    </div>
+
+    <div class="validation-response" id="validation-news">
+      <p class="validation-response-heading">The world is heavy right now. That's not in your head.</p>
+      <p>Rising antisemitism, anti-Zionism weaponized in social spaces, the grief of watching communities fracture — this is the water Jewish people are swimming in. When that enters your romantic life, the weight compounds. You're not being dramatic. The fear is proportionate.</p>
+      <p>You are still allowed to want love. The world's difficulty does not cancel your desire.</p>
+      <div class="somatic-suggestion">
+        <strong>A body practice for this:</strong>
+        Step outside for one minute if you can. Feel air on your skin. You are allowed to exist in the physical world, fully, even now.
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <p class="section-eyebrow">After you've been seen</p>
+    <div class="reflection-card" style="border-top-color: var(--blush);">
+      <p class="reflection-q">What do you need right now — not from anyone else, just from yourself?</p>
+      <textarea class="reflection-input" placeholder="There's no wrong answer here..."></textarea>
+    </div>
+
+    <div class="closing">
+      <p>Painful interactions leave marks. You're allowed to let this matter, and you're allowed to eventually let it move through you. Neither one cancels the other. You are someone who keeps showing up. That is not small.</p>
+    </div>
+
+    <div style="margin-top:2rem; padding:1.2rem 1.6rem; background:var(--warm-mid); border-radius:10px; text-align:center;">
+      <p style="font-size:0.82rem; color:#6A6060; line-height:1.7;">If this has surfaced something deeper that needs support, please reach out to a licensed therapist or the <a href="https://www.crisistextline.org" target="_blank" style="color:var(--blush);">Crisis Text Line</a> (text HOME to 741741) or call <a href="tel:988" style="color:var(--blush);">988</a>.</p>
+    </div>
+    <p style="font-size:0.72rem; color:#BBB; text-align:center; margin-top:1.5rem; padding-bottom:2rem;">© 2026 Paula Kirsch, LCSW, CST &nbsp;·&nbsp; All rights reserved</p>
+  </div>
+</div>
+
+<script>
+  // Navigation
+  function goTo(screenId) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + screenId).classList.add('active');
+    window.scrollTo(0,0);
+  }
+
+  // Breath animation
+  let breathPhase = 0;
+  let breathTimer = null;
+  const phases = ['expanding','holding','contracting'];
+  const labels = ['Breathe in...','Hold...','Breathe out...'];
+  const durations = [4000, 4000, 4000];
+
+  function startBreath() {
+    if (breathTimer) { clearTimeout(breathTimer); }
+    runBreath();
+  }
+
+  function runBreath() {
+    const circle = document.getElementById('breathCircle');
+    const inner = document.getElementById('breathInner');
+    const instr = document.getElementById('breathInstruction');
+    circle.className = 'breath-circle ' + phases[breathPhase];
+    inner.innerHTML = labels[breathPhase];
+    instr.textContent = labels[breathPhase];
+    breathTimer = setTimeout(() => {
+      breathPhase = (breathPhase + 1) % 3;
+      runBreath();
+    }, durations[breathPhase]);
+  }
+
+  // Grounding affirmations
+  const groundingAffirmations = [
+    '"My safety lives in me, not in their acceptance."',
+    '"I am allowed to take up space exactly as I am."',
+    '"My identity is not a controversy. It is a life."',
+    '"I can be curious about this moment instead of afraid of it."',
+    '"I belong to myself first. That is enough to start."',
+    '"Being seen is terrifying. I am brave enough to try anyway."',
+    '"This feeling will move through me. It always does."',
+  ];
+  let groundingIdx = 0;
+  function refreshGroundingAffirmation() {
+    groundingIdx = (groundingIdx + 1) % groundingAffirmations.length;
+    document.getElementById('groundingAffirmation').textContent = groundingAffirmations[groundingIdx];
+  }
+
+  // Resilience quotes
+  const resilienceQuotes = [
+    { text: '"Between stimulus and response there is a space. In that space is our power to choose our response."', source: '— Viktor Frankl' },
+    { text: '"When we are no longer able to change a situation, we are challenged to change ourselves."', source: '— Viktor Frankl' },
+    { text: '"Life is never made unbearable by circumstances, but only by lack of meaning and purpose."', source: '— Viktor Frankl' },
+    { text: '"Everything can be taken from a person but one thing: the last of the human freedoms — to choose one\'s attitude."', source: '— Viktor Frankl' },
+    { text: '"You are not what happened to you. You are what you choose to become."', source: '— Paraphrase, C.G. Jung' },
+  ];
+  let resilienceIdx = 0;
+  function refreshResilienceQuote() {
+    resilienceIdx = (resilienceIdx + 1) % resilienceQuotes.length;
+    const q = resilienceQuotes[resilienceIdx];
+    document.getElementById('resilienceQuote').textContent = q.text;
+    document.querySelector('.affirmation-source').textContent = q.source;
+  }
+
+  // Validation responses
+  function showValidation(type) {
+    // Mark chip selected
+    document.querySelectorAll('.validation-chip').forEach(c => c.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+    // Hide all responses
+    document.querySelectorAll('.validation-response').forEach(r => r.classList.remove('visible'));
+    // Show the right one
+    const target = document.getElementById('validation-' + type);
+    if (target) {
+      target.classList.add('visible');
+      setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+  }
+</script>
+</body>
+</html>
